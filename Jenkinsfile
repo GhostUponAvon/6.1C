@@ -61,4 +61,17 @@ pipeline {
         }
         
     }
+    post {
+        always {
+            echo "Pipeline Finished"
+        }
+        success {
+            echo "Pipeline executed successfully"
+            emailext attachLog: true, body: 'The pipeline has built successfully', recipientProviders: [buildUser()], subject: 'Pipeline build status'
+        }
+        failure {
+            echo "Pipeline execution failed"
+            emailext attachLog: true, body: 'The pipeline build has failed', recipientProviders: [buildUser()], subject: 'Pipeline build status'
+        }
+    }
 }
