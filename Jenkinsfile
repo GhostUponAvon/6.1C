@@ -67,11 +67,11 @@ pipeline {
         }
         success {
             echo "Pipeline executed successfully"
-            emailext attachLog: true, body: 'The pipeline has built successfully', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status'
+            emailext attachLog: true, body: 'The pipeline has built: successfully', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status'
         }
         failure {
             echo "Pipeline execution failed"
-            emailext attachLog: true, body: 'The pipeline build has failed', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status'
+            emailext attachLog: true, body: 'The pipeline build has: failed', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status'
         }
     }
 }
