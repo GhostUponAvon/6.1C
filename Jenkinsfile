@@ -36,6 +36,7 @@ pipeline {
                     echo "Testing failed"
                     emailext attachLog: true, body: 'The testing has: failed', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status: Testing'
                 }
+            }
         }
         stage('Code Quality Check') {
             steps {
@@ -60,6 +61,7 @@ pipeline {
                     echo "Security scan failed"
                     emailext attachLog: true, body: 'The security scan has: failed', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status: Security'
                 }
+            }
         }
         stage('Deploy') {
             steps {
@@ -80,7 +82,7 @@ pipeline {
                     echo "Integration testing failed"
                     emailext attachLog: true, body: 'The integration testing has: failed', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status: Integration'
                 }
-    }
+            }
         }
         stage('Deploy to Production') {
             steps {
