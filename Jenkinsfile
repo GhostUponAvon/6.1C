@@ -27,6 +27,15 @@ pipeline {
                 }
 
             }
+            post {
+                success {
+                    echo "Testing executed successfully"
+                    emailext attachLog: true, body: 'The testing was: successfully', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status: Testing'
+                }
+                failure {
+                    echo "Testing failed"
+                    emailext attachLog: true, body: 'The testing has: failed', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status: Testing'
+                }
         }
         stage('Code Quality Check') {
             steps {
@@ -42,6 +51,15 @@ pipeline {
                 echo "Scanning for security flaws with sast-scan cdxgen (https://github.com/ShiftLeftSecurity/sast-scan.git)"
 
             }
+            post {
+                success {
+                    echo "Security scan executed successfully"
+                    emailext attachLog: true, body: 'The security scan was: successfully', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status: Security'
+                }
+                failure {
+                    echo "Security scan failed"
+                    emailext attachLog: true, body: 'The security scan has: failed', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status: Security'
+                }
         }
         stage('Deploy') {
             steps {
@@ -53,6 +71,16 @@ pipeline {
                 echo "Performing Integration testing"
                 sleep 10
             }
+            post {
+                success {
+                    echo "Integration testing executed successfully"
+                    emailext attachLog: true, body: 'The integration testing was: successfully', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status: Integration'
+                }
+                failure {
+                    echo "Integration testing failed"
+                    emailext attachLog: true, body: 'The integration testing has: failed', to:'mikehodgetheboss@gmail.com', subject: 'Pipeline build status: Integration'
+                }
+    }
         }
         stage('Deploy to Production') {
             steps {
